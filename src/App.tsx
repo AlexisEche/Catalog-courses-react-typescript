@@ -1,23 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Home from './components/pages/Home'
 
-function App() {
+function App():JSX.Element {
+  let [courses, setCourses] = useState([]);
+  useEffect(() => {
+    const datos = async()=>{
+      await axios.get("http://localhost:8000/api/v1/courses/")
+      .then(response => setCourses(response.data));
+    }
+    datos()
+  }, []);
+  console.log(courses)
+
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
-      <div className="px-6 py-4">
-        <div className="font-bold text-purple-500 text-xl mb-2">
-          Blessing Krofegha
-        </div>
-        <p className="text-gray-700 text-base">
-          When i’m not coding i switch to netflix with biscuits and cold tea as my companion. <span></span>😜
-        </p>
-      </div>
-      <div className="">
-        <span className="">#Software Engineer</span>
-        <span className="">#Writter</span>
-        <span className="">#Public Speaker</span>
-      </div>
+    <div className="App">
+      <Home data={courses}/>
     </div>
-
   );
 }
 
