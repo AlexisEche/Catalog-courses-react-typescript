@@ -19,3 +19,8 @@ Catálogo que permite explorar cursos utilizando filtros y paginación, mostrand
 ### Proyecto deployado
 
 Para acceder al proyecto deployado, puede hacerlo desde la dirección: `https://catalog-courses-react-typescript.netlify.app/`
+
+### Capturas de pantalla
+
+![](https://raw.githubusercontent.com/AlexisEche/Catalog-courses-react-typescript/main/src/assets/images/app1.png)
+![](https://raw.githubusercontent.com/AlexisEche/Catalog-courses-react-typescript/main/src/assets/images/app2.png)
