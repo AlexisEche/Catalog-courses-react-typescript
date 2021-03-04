@@ -32,7 +32,7 @@ const Home: React.FC<Props> = ()=>{
 
   useEffect(() => {
     const dataset = async()=>{
-      await axios.get("http://localhost:8000/api/v1/courses/")
+      await axios.get("https://catalog-courses-django.herokuapp.com/api/v1/courses/")
       .then(response => setCourses(response.data));
     }
     dataset()

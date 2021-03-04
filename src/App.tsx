@@ -6,18 +6,6 @@ import DetailOfCourse from "./components/pages/DetailOfCourse";
 import Checkout from "./components/pages/Checkout";
 
 function App():JSX.Element {
-  // eslint-disable-next-line 
-  let [_, setCourses] = useState([]);
-
-  useEffect(() => {
-    const datos = async()=>{
-      await axios.get("https://catalog-courses-django.herokuapp.com/api/v1/courses/")
-      .then(response => setCourses(response.data));
-      // setloading(false)
-    }
-    datos()
-  }, []);
-
   return (
     <Router>
       <Switch>

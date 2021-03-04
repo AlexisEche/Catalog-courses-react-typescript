@@ -19,7 +19,7 @@ const DetailOfCourse: React.FC<Props> = ({match}) =>{
 
   useEffect(() => {
     const idCourse = async()=>{
-      await axios.get(`http://localhost:8000/api/v1/courses/${idCurrentCourse}/`)
+      await axios.get(`https://catalog-courses-django.herokuapp.com/api/v1/courses/${idCurrentCourse}/`)
       .then(response => setCurrentCourse(response.data));
     }
     idCourse()
