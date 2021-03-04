@@ -6,6 +6,7 @@ import DetailOfCourse from "./components/pages/DetailOfCourse";
 import Checkout from "./components/pages/Checkout";
 
 function App():JSX.Element {
+  // eslint-disable-next-line 
   let [_, setCourses] = useState([]);
 
   useEffect(() => {
