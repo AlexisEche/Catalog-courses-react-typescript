@@ -6,15 +6,19 @@ import rectangle2 from '../assets/images/rectangle2.svg';
 import rectangle3 from '../assets/images/rectangle3.svg';
 import starSmall from '../assets/images/starSmall.svg';
 import arrowDown from '../assets/images/arrow-down.svg';
-import BlockStars from './BlockStars'
 
-function Ratings(){
+interface Props{
+  data: any,
+}
+
+const Ratings: React.FC<Props> = ({data}) =>{
+
   return(
     <div className="flex sm:w-3/6 w-full flex-col justify-between  sm:px-0 px-5">
       <h3 className="pt-12 font-black sm:text-4xl text-2xl">Valoraciones</h3> 
       <div className="sm:flex-row sm:flex w-10/12 justify-between pb-6 flex-col">
-        <div className="flex flex-col justify-center pr-8">
-          <p className="font-extrabold text-5xl">4.8</p>
+        <div className="flex flex-col justify-center items-center pr-8">
+          <p className="font-extrabold text-5xl">{data.course_score}</p>
           <div className="flex">
             <img src={star} alt=""/>
             <img src={star} alt=""/>
@@ -81,7 +85,7 @@ function Ratings(){
         <div className="w-36 h-10 flex justify-between ">
           <div className="w-10 h-10 bg-gray-200 rounded-xl"></div>
           <div className="">
-            <p className="font-bold">Usuario213</p>
+            <p className="font-bold">{data.username}</p>
             <div className="flex">
               <img src={starSmall} alt=""/>
               <img src={starSmall} alt=""/>

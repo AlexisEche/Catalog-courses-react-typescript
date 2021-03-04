@@ -2,6 +2,8 @@ import React from 'react';
 import people from '../assets/images/people.svg';
 import signal from '../assets/images/signal.svg';
 import star from '../assets/images/star.svg';
+import { Link } from "react-router-dom";
+
 interface Props{
   name: any[],
   price: any[],
@@ -9,12 +11,13 @@ interface Props{
   users: any[],
   score: any[],
   realPrice: any[],
+  id: any[],
 }
 
 const Card: React.FC<Props> = ({...props})=>{
 
   return(
-    <div className="my-1 w-full md:w-1/2 lg:mb-7 lg:px-4 lg:w-1/3 xl:w-1/4  md:px-4 md:pb-3 pb-6">
+    <div className="my-1 w-full md:w-1/2 lg:mb-7 lg:px-2 md:px-2 lg:w-1/3  xl:w-1/4 md:pb-3 pb-6">
       <div className="overflow-hidden rounded-lg shadow-lg ">
         <div className="p-2 card--image w-full bg-gray-300 rounded-t-lg h-40 ">
           <button className=" w-20 h-6 flex text-xs	 items-center justify-center bg-gray-700 text-white rounded-lg  border-4 border-gray-700 rounded">TAG VENTA</button>
@@ -35,11 +38,14 @@ const Card: React.FC<Props> = ({...props})=>{
             <h6 className="strike text-gray-500 text-xs line-through"> CO${props.realPrice}</h6>
           </div>
           <div className="text-center">
+          <Link  to={{pathname:`/details/${props.id}`}} >
             <button className="w-full bg-gray-700 text-white font-bold py-2 rounded-lg border-4 border-gray-700 rounded">Comprar ahora</button>
+          </Link>
           </div>
         </div>
       </div>
     </div>
+
   )
 }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header';
 import DescriptionCourse from '../DescriptionCourse';
 import TemaryCourse from '../TemaryCourse';
@@ -7,19 +7,35 @@ import ProyectsOfCourse from '../ProyectsOfCourse';
 import Ratings from '../Ratings';
 import FrequentQuestions from '../FrequentQuestions';
 import CardBuyCourse from '../CardBuyCourse';
+import axios from 'axios';
 
-function DetailOfCourse(){
+interface Props{
+  match: any,
+}
+
+const DetailOfCourse: React.FC<Props> = ({match}) =>{
+  const [currentCourse,setCurrentCourse]:any = useState({})
+  const idCurrentCourse = match.params.id
+
+  useEffect(() => {
+    const idCourse = async()=>{
+      await axios.get(`http://localhost:8000/api/v1/courses/${idCurrentCourse}/`)
+      .then(response => setCurrentCourse(response.data));
+    }
+    idCourse()
+  }, [idCurrentCourse]);
+
   return(
     <div className="container mx-auto sm:px-16 px-0">
       <Header/>
       <div className="xl:flex xl:flex-between flex-row-reverse w-full">
-        <CardBuyCourse/>
-        <DescriptionCourse/>
+        <CardBuyCourse data={currentCourse}/> 
+        <DescriptionCourse data={currentCourse}/>
       </div>
       <TemaryCourse/>
       <ExplanationCourse/>
       <ProyectsOfCourse/>
-      <Ratings/>
+      <Ratings data={currentCourse}/>
       <FrequentQuestions/>
 
     </div>

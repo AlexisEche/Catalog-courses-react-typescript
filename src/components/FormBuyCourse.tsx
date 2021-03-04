@@ -5,13 +5,15 @@ import paypal from '../assets/images/paypal.svg';
 import banks from '../assets/images/banks.svg';
 import { Formik, Field, Form, FormikHelpers } from 'formik';
 
-interface Values {
-  firstName: string;
-  lastName: string;
-  email: string;
+interface Values {}
+interface Props{
+  data: any,
 }
 
-function FormBuyCourse(){
+const FormBuyCourse: React.FC<Props>=({data})=>{
+
+  const purchase = [data["name"]]
+
   return(
     <div className="sm:w-2/5 w-full flex flex-col justify-between pt-2 sm:pl-20 sm:pt-12 sm:mx-0  p-4">
       <div className="sm:flex sm:block hidden ">
@@ -36,24 +38,22 @@ function FormBuyCourse(){
       <div className="">
         <Formik
           initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
           }}
           onSubmit={(
             values: Values,
-            { setSubmitting }: FormikHelpers<Values>
-          ) => {
-            setTimeout(() => {
-              alert(JSON.stringify(values, null, 2));
+            { setSubmitting }: FormikHelpers<Values>,
+            ) => {
+              setTimeout(() => {
+              localStorage.setItem('CurrentPurchase', JSON.stringify({...values,purchase}));
+              window.confirm(`Su orden de compra a sido procesada, gracias su compra`);
               setSubmitting(false);
-            }, 500);
+            },500, [values]);
           }}
         >
-          <Form className="flex flex-col space-y-2">
+          <Form className="flex flex-col space-y-2" id="input">
             <div className="flex flex-col bg-gray-100 p-7 space-y-5 rounded-lg">
               <div className="flex items-center space-x-3">
-                <Field checked type="radio" name="picked" value="One" />
+                <Field checked type="radio" name="picked" value="agreeCard" />
                 <p className="text-lg	font-extrabold sm:hidden block ">Tarjeta</p>
                 <p className="text-lg	font-extrabold hidden sm:block">Pagar con tarjeta</p>
                 <img src={banks} alt=""/>
@@ -63,18 +63,18 @@ function FormBuyCourse(){
                 <Field className="border h-14 rounded-lg pl-4" id="firstName" name="firstName"/>
               </div>
               <div className="flex flex-col">
-                <label className="font-bold	text-sm	pb-4" htmlFor="lastName">Número de tarjeta</label>
-                <Field className="border h-14 rounded-lg pl-4" id="lastName" name="lastName"/>
+                <label className="font-bold	text-sm	pb-4" htmlFor="creditCard">Número de tarjeta</label>
+                <Field className="border h-14 rounded-lg pl-4" id="creditCard" name="creditCard"/>
               </div>
 
-              <div className="sm:flex flex-col sm:space-x-6 space-x-0 space-y-5">
+              <div className="flex sm:flex-row flex-col sm:space-x-6 space-x-0 sm:space-y-0 space-y-5">
                 <div className="space-y-4">
-                  <label className="font-bold	text-sm" htmlFor="lastName">Fecha de vencimiento</label>
-                  <Field className="border h-14 rounded-lg pl-4 w-full" id="lastName" name="lastName" placeholder="Ej. 04/22"/>
+                  <label className="font-bold	text-sm" htmlFor="expirationDate">Fecha de vencimiento</label>
+                  <Field className="border h-14 rounded-lg pl-4 w-full" id="expirationDate" name="expirationDate" placeholder="Ej. 04/22"/>
                 </div>
                 <div className="space-y-4">
-                  <label className="font-bold	text-sm" htmlFor="lastName">Código de seguridad</label>
-                  <Field className="border h-14 rounded-lg pl-4 w-full" id="lastName" name="lastName" placeholder="CVC/CVV"/>
+                  <label className="font-bold	text-sm" htmlFor="securityCode">Código de seguridad</label>
+                  <Field className="border h-14 rounded-lg pl-4 w-full" id="securityCode" name="securityCode" placeholder="CVC/CVV"/>
                 </div>
               </div>
             </div>
@@ -83,17 +83,16 @@ function FormBuyCourse(){
               <img src={pagoefectivo} alt=""/>
             </div>
             <div className="flex items-center bg-gray-100 p-7 rounded-lg space-x-3">
-              <Field type="radio" name="picked" value="One" />
+              <Field type="radio" name="picked" value="two" />
               <img src={paypal} alt=""/>
             </div>
             <div className="flex items-center space-x-2.5">
-              <Field className="w-4 h-4" checked type="checkbox" name="checkbox" value="One" id="checkbox" />
+              <Field className="w-4 h-4" checked type="checkbox" name="checkbox" value="agree" id="checkbox" />
               <label className="text-xs text-gray-500 pt-7 pb-5" htmlFor="checkbox">Acepto expresamente todos los Términos y Condiciones.</label>
             </div>
             <div className="pb-32">
               <button type="submit" className="sm:w-80 w-full card--buy bg-gray-700 text-white font-bold py-2 rounded-lg border-4 border-gray-700 rounded">Comprar ahora</button>
             </div>
-
           </Form>
         </Formik>
       </div>
